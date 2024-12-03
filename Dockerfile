@@ -16,4 +16,7 @@ ENV PORT=8080
 # Command to run the app, using the PORT environment variable
 CMD ["sh", "-c", "java -jar /app/MyWebsite.war --server.port=${PORT}"]
 
+RUN apt-get update && apt-get install -y bash
+
+
 
