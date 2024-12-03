@@ -1,15 +1,19 @@
-# Use an official OpenJDK runtime as a parent image
+# Use an official OpenJDK image with JDK 11
 FROM openjdk:11-jdk-slim
 
-# Set the working directory inside the container
+# Set the working directory
 WORKDIR /app
 
-# Copy your WAR file into the container
+# Copy the WAR file into the container
 COPY dist/MyWebsite.war /app/MyWebsite.war
 
-# Expose the port your app runs on
+# Expose the port (optional, for documentation)
 EXPOSE 8080
 
-# Command to run the app
-CMD ["java", "-jar", "MyWebsite.war", "--server.port=${PORT}"]
+# Set the PORT environment variable dynamically
+ENV PORT=8080
+
+# Command to run the app, using the PORT environment variable
+CMD ["sh", "-c", "java -jar /app/MyWebsite.war --server.port=${PORT}"]
+
 
